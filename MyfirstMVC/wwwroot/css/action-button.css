@@ -1,0 +1,55 @@
+﻿.action-btn {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border-color: transparent;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    */ /* Prevent wrapping in the button */
+}
+
+    .action-btn:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+        border-color: #2563eb;
+        
+    }
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+}
+
+.action-btn {
+    padding: 0.35rem;
+    margin-right: 0.25rem;
+}
+
+.icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-right: 0;
+}
+
+.edit-btn {
+    background-color: transparent;
+    color: #2563eb;
+}
+
+.delete-btn {
+    background-color: transparent;
+    color: #dc2626;
+}
+.spacer {
+    margin-left: 2px;
+}
+
+.inline-form {
+    display: inline-block;
+    margin: 0 2px; /* Optional: adds a little space between buttons */
+}

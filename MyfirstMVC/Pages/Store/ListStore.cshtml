@@ -1,0 +1,45 @@
+﻿@page
+@model MyfirstMVC.Pages.Store.ListStoreModel
+@{
+}
+<
+<link rel="stylesheet" href="~/css/striped-table.css">
+
+<div>
+    <h1>Store List</h1>
+
+    @if (Model.Stores != null && Model.Stores.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address 1</th>
+                    <th>Address 2</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var store in Model.Stores)
+                {
+                    <tr>
+                        <td>@store.StoreId</td>
+                        <td>@store.Name</td>
+                        <td>@store.Address1</td>
+                        <td>@store.Address2</td>
+                        <td>@store.City</td>
+                        <td>@store.State</td>
+                        <td>@store.PostalCode</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No stores found.</p>
+    }
+</div>

@@ -1,0 +1,68 @@
+﻿@page
+@model MyfirstMVC.Pages.Store.ManageStoreModel
+@{
+}
+
+<link rel="stylesheet" href="~/css/striped-table.css">
+<link rel="stylesheet" href="~/css/action-button.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div>
+    <h1>Store List</h1>
+
+    @if (Model.Stores != null && Model.Stores.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Address 1</th>
+                    <th>Address 2</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip Code</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var store in Model.Stores)
+                {
+                    <tr>
+                        <td>@store.Name</td>
+                        <td>@store.Address1</td>
+                        <td>@store.Address2</td>
+                        <td>@store.City</td>
+                        <td>@store.State</td>
+                        <td>@store.PostalCode</td>
+                        <td>
+                            <form method="post" asp-page-handler="EditButton" class="inline-form">
+                                @Html.AntiForgeryToken()
+                                <button class="action-btn edit-btn focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        type="submit"
+                                        title="Edit @store.Name"
+                                        alt="Edit @store.Name">
+                                    <i class="fas fa-edit"></i><span class="spacer"></span>
+                                </button>
+                                <input type="hidden" name="id" value="@store.StoreId" />
+                            </form>
+                            <form method="post" asp-page-handler="DeleteButton" class="inline-form">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@store.StoreId" />
+                                <button class="action-btn delete-btn focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        type="submit"
+                                        title="Delete @store.Name"
+                                        alt="Delete @store.Name">
+                                    <i class="fas fa-trash-alt"></i><span class="spacer"></span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No stores found.</p>
+    }
+</div>
