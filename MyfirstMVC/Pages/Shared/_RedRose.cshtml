@@ -1,0 +1,44 @@
+﻿
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="~/css/red-rose.css">
+   
+</head>
+<body>
+    <div class="container">
+        <div class="inner-left">
+            <div class="block-pics ocean">
+                <img src="~/images/pic.jpg" class="selection-image" />
+            </div>
+            <div class="block-icons">
+                <a href="https://www.facebook.com/oliver.parcker.2025" target="_blank">
+                    <img src="~/images/fb.jpg" class="selection-icon" />
+                </a>
+            </div>
+            <div class="block-pics tan">
+                <img src="~/images/pic 2.jpg" class="selection-image" />
+            </div>
+            <div class="block-icons">
+                <a href="https://www.instagram.com/oliver.parcker/" target="_blank">
+                    <img src="~/images/ig.jpg" class="selection-icon" />
+                </a>
+            </div>
+            <div class="block-pics walnut-brown">
+                <img src="~/images/Fb2.jpg" class="selection-image" />
+            </div>
+            <div class="block-icons">
+                <a href="https://www.threads.com/&#64;oliver.parcker" target="_blank">
+                    <img src="~/images/thread.jpg" class="selection-icon" />
+                </a>
+            </div>
+        </div>
+        <div class="inner-right">
+            @RenderBody()
+        </div>
+    </div>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

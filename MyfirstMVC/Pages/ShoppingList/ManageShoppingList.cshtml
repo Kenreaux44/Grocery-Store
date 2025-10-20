@@ -1,0 +1,125 @@
+﻿@page
+@model MyfirstMVC.Pages.ShoppingList.ManageShoppingListModel
+@{
+}
+
+<link rel="stylesheet" href="~/css/manage-shoppinglist.css">
+<link rel="stylesheet" href="~/css/buttons.css">
+<link rel="stylesheet" href="~/css/overlay.css">
+<link rel="stylesheet" href="~/css/striped-table.css">
+<link rel="stylesheet" href="~/css/action-button.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div>
+    <h1> Manage Shopping List</h1>
+
+    @if (Model.ShoppingLists != null && Model.ShoppingLists.Any())
+    {
+        <div class="right-justify">
+            <button id="openModalBtn" class="action-btn create-btn" title="Create Product">
+                <i class="fas fa-plus"></i> Create
+            </button>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Store</th>
+                    <th>Title</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var shoppingList in Model.ShoppingLists)
+                {
+                    <tr>
+                        <td>@shoppingList.UserName</td>
+                        <td>@shoppingList.Store</td>
+                        <td>@shoppingList.Title</td>
+                        <td>
+                            <form method="post" asp-page-handler="EditButton" class="inline-form">
+                                @Html.AntiForgeryToken()
+                                <button class="action-btn edit-btn focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        type="submit"
+                                        title="Edit @shoppingList.UserName"
+                                        alt="Edit @shoppingList.UserName">
+                                    <i class="fas fa-edit"></i><span class="spacer"></span>
+                                </button>
+                                <input type="hidden" name="id" value="@shoppingList.ShoppingListId" />
+                            </form>
+                            <form method="post" asp-page-handler="DeleteButton" class="inline-form">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@shoppingList.ShoppingListId" />
+                                <button class="action-btn delete-btn focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        type="submit"
+                                        title="Delete @shoppingList.UserName"
+                                        alt="Delete @shoppingList.UserName">
+                                    <i class="fas fa-trash-alt"></i><span class="spacer"></span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Shopping List found.</p>
+    }
+</div>
+
+@* create modal *@
+<div id="modalOverlay" class="modal-overlay"></div>
+<div id="createModal" class="modal">
+    <h2>Create Shopping List</h2>
+    <form method="post" asp-page-handler="Create">
+        <div class="modal-body flex-vertical-container">
+            <div class="fixed"> 
+                <label for="new-shoppinglist-title">Title:</label>
+                <input asp-for="Title" id="new-shoppinglist-title" class="form-control manage-shoppinglist-modal-title" maxlength="500" placeholder="Enter title here" />
+            </div>
+            <div class="fixed modal-row">
+                <label for="new-shoppinglist-store">Store:</label>
+               <select id="new-shoppinglist-store" asp-for="StoreId" asp-items="Model.Stores" class="form-control">
+                    <option value="0">-- Choose a store --</option>
+                </select>
+            </div>
+            <div class="flex-fill">
+                <label>User:</label>
+               <select id="new-shoppinglist-user" asp-for="UserId" asp-items="Model.Users" class="form-control">
+                    <option value="0">-- Choose a member --</option>
+                </select>
+           </div>
+        </div>
+        <div class="modal-buttons">
+            <button type="submit" class="action-btn create-btn">Create</button>
+            <button id="closeModalBtn" type="button" class="action-btn">Close</button>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script>
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('createModal');
+        const overlay = document.getElementById('modalOverlay');
+
+        openModalBtn.addEventListener('click', function () {
+            modal.classList.add('show');
+            overlay.classList.add('show');
+        });
+
+        closeModalBtn.addEventListener('click', function () {
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+        overlay.addEventListener('click', function () {
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    </script>
+    }
