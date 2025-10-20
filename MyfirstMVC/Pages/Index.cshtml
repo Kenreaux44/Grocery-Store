@@ -1,0 +1,62 @@
+﻿@page
+@using MyfirstLib.Models
+@model IndexModel
+@{
+    ViewData["Title"] = "Tools Page";
+}
+<link rel="stylesheet" href="~/css/landingpage.css">
+
+<div class="background-image-div faded-background-div">
+    <div class="floating-overlay">
+        <!-- Overlay content goes here -->
+    </div>
+</div>
+<div class="centered-menu">
+    <a asp-page="/Product/ListProduct">
+        List Product
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/Product/ManageProduct">
+        Manage Product
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/ShoppingList/ListShoppingList">
+        List Shopping List
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/ShoppingList/ManageShoppingList">
+        Manage Shopping List
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/ShoppingListItem/ListShoppingListItem">
+         List Shopping List Item
+    </a>
+    <br />
+    <a asp-page="/ShoppingListItem/ManageShoppingListItem">
+        Manage Shopping List Item
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/Store/ListStore">
+        List Store
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/Store/ManageStore">
+        Manage Store
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/StoreProduct/ListStoreProduct">
+      List Store Product
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/StoreProduct/ManageStoreProduct">
+        Manage Store Product
+    </a>
+    <br />
+    <a asp-page="/User/ListUser">
+        List User
+    </a>
+    &nbsp;|&nbsp;
+    <a asp-page="/User/ManageUser">
+       Manage User
+    </a>
+</div>

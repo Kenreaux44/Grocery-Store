@@ -1,0 +1,48 @@
+﻿.background-image-div {
+    width: 100%;
+    height: 100vh; /* Set a specific height to make the image visible */
+    background-image: url('../images/FamilyshoppingImage.jpg'); /* Replace with your image file path */
+    background-size: cover; /* Optional: Scale the image to cover the entire container */
+    background-position: center; /* Optional: Center the image */
+    background-repeat: no-repeat; /* Optional: Prevent the image from repeating */
+    
+}
+
+.faded-background-div {
+    /* Set a fallback background color for the fade effect to blend with */
+    background-color: darkred;
+    /* Mask-image properties for the fading effect */
+    mask-image:
+    /* Top fade */
+    linear-gradient(to bottom, transparent, darkred 5%, darkred 95%, transparent),
+    /* Bottom fade */
+    linear-gradient(to top, transparent, darkred 5%, darkred 95%, transparent),
+    /* Left fade */
+    linear-gradient(to right, transparent, darkred 5%, darkred 95%, transparent),
+    /* Right fade */
+    linear-gradient(to left, transparent, darkred 5%, darkred 95%, transparent);
+    /* Set how multiple masks interact */
+    mask-composite: intersect;
+}
+
+
+.floating-overlay {
+    position: absolute;
+    top: 49.5%; /* Adjust as needed */
+    left: 50%; /* Adjust as needed */
+    transform: translate(-50%, -50%);
+    width: 75%; /* Adjust as needed */
+    height: 80%; /* Adjust as needed */
+    background: rgb(181, 103, 39, 0.65); /* Light grey with 65% opacity */
+    border-radius: 75px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    z-index: 10;
+    padding: 20px;
+}
+
+.background-image-div {
+    position: relative; /* Ensure child absolute positioning works */
+}
+.centered-menu {
+    text-align:center;
+}

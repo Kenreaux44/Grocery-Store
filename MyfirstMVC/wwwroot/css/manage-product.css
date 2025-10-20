@@ -1,0 +1,33 @@
+﻿.modal-body {
+    border: 1pt solid red;
+}
+
+.flex-vertical-container {
+    display: flex;
+    flex-direction: column;
+    height: 400px; /* or 100%, or any desired height */
+    border: none;
+}
+
+    .flex-vertical-container > .fixed {
+        padding: 0.5rem;
+
+    }
+
+    .flex-vertical-container > .flex-fill {
+        flex: 1;
+        padding: 0.5rem;
+        overflow: auto;
+    }
+
+.manage-product-modal-name {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+.manage-product-modal-description {
+    min-width: 570px;
+    max-width: 570px;
+    min-height: 100px;
+    max-height: 100px;
+}

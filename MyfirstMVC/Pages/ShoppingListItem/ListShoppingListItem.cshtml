@@ -1,0 +1,41 @@
+﻿@page
+@model MyfirstMVC.Pages.ShoppingListItem.ListShoppingListItemModel
+@{
+}
+<link rel="stylesheet" href="~/css/striped-table.css">
+
+<div>
+    <h1>Shopping List Item</h1>
+
+    @if (Model.ShoppingListItems != null && Model.ShoppingListItems.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>   
+                    <th>Shopping list</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var shoppingListItem in Model.ShoppingListItems)
+                {
+                    <tr>
+                        <td>@shoppingListItem.ShoppingListItemId</td>  
+                        <td>@shoppingListItem.ShoppingList</td>
+                        <td>@shoppingListItem.Product</td>
+                        <td>@shoppingListItem.Quantity @shoppingListItem.UnitOfMeasure</td>
+    
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Shopping List Item found.</p>
+    }
+</div>

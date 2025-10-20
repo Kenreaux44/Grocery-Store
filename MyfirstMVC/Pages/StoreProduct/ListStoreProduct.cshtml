@@ -1,0 +1,36 @@
+﻿@page
+@model MyfirstMVC.Pages.StoreProduct.ListStoreProductModel
+@{
+}
+<link rel="stylesheet" href="~/css/striped-table.css">
+
+<div>
+    <h1>Store Product List</h1>
+
+    @if (Model.StoreProducts != null && Model.StoreProducts.Any())
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Store</th>
+                    <th>Product</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var storeProduct in Model.StoreProducts)
+                {
+                    <tr>
+                        <td>@storeProduct.StoreProductId</td>
+                        <td>@storeProduct.Store</td>
+                        <td>@storeProduct.Product</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Store Products found.</p>
+    }
+</div>
