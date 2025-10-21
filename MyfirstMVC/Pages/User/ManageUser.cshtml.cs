@@ -32,6 +32,7 @@ namespace MyfirstMVC.Pages.User
         {            
             Users = _userService.GetAll().ToList();
         }
+       
         public IActionResult OnPostCreate(int id)
         {
 
