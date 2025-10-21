@@ -73,7 +73,7 @@
 <div id="modalOverlay" class="modal-overlay"></div>
 <div id="createModal" class="modal">
     <h2>Create Product</h2>
-    <form method="post" asp-page-handler="Create">>
+    <form method="post" asp-page-handler="Create">
         <div class="modal-body flex-vertical-container">
             <div class="fixed"> 
                 <label for="new-product-name">Name:</label>
@@ -102,11 +102,12 @@
         const modal = document.getElementById('createModal');
         const overlay = document.getElementById('modalOverlay');
 
-        openModalBtn.addEventListener('click', function () {
-            modal.classList.add('show');
-            overlay.classList.add('show');
-        });
-
+        // Guard against missing elements so script doesn't throw when openModalBtn isn't rendered
+        if (openModalBtn && closeModalBtn && modal && overlay) {
+            openModalBtn.addEventListener('click', function () {
+                modal.classList.add('show');
+                overlay.classList.add('show');
+            });
         closeModalBtn.addEventListener('click', function () {
             modal.classList.remove('show');
             overlay.classList.remove('show');
@@ -116,5 +117,14 @@
             modal.classList.remove('show');
             overlay.classList.remove('show');
         });
+
+         // Optional: close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                modal.classList.remove('show');
+                overlay.classList.remove('show');
+            }
+        });
+        }
     </script>
 }
