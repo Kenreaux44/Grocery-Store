@@ -2,7 +2,9 @@
 @model MyfirstMVC.Pages.Store.ManageStoreModel
 @{
 }
-
+<link rel="stylesheet" href="~/css/manage-store.css">
+<link rel="stylesheet" href="~/css/buttons.css">
+<link rel="stylesheet" href="~/css/overlay.css">
 <link rel="stylesheet" href="~/css/striped-table.css">
 <link rel="stylesheet" href="~/css/action-button.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -12,6 +14,11 @@
 
     @if (Model.Stores != null && Model.Stores.Any())
     {
+        <div class="right-justify">
+            <button id="openModalBtn" class="action-btn create-btn" title="Create Product">
+                <i class="fas fa-plus"></i> Create
+            </button>
+        </div>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -66,3 +73,79 @@
         <p>No stores found.</p>
     }
 </div>
+                                        
+@* create modal *@
+<div id="modalOverlay" class="modal-overlay"></div>
+<div id="createModal" class="modal">
+    <h2>Create Product</h2>
+    <form method="post" asp-page-handler="Create">
+        <div class="modal-body flex-vertical-container">
+            <div class="fixed">
+                <label for="new-store-name">Name:</label>
+                <input asp-for="NewStoreName" id="new-store-name" class="form-control manage-store-modal-textbox" maxlength="255" placeholder="Enter new member name" />
+            </div>
+            <div class="fixed modal-row">
+                <label for="new-store-address1">Address:</label>
+                <input asp-for="NewStoreAddress1" id="new-store-address1" class="form-control manage-store-modal-textbox" maxlength="255" placeholder="Enter street address" />
+            </div>
+            <div class="fixed modal-row">
+                <label for="new-store-address2">Address:</label>
+                <input asp-for="NewStoreAddress2" id="new-store-lastname" class="form-control manage-store-modal-textbox" maxlength="255" placeholder="Enter apt, unit, building, ect." />
+            </div>
+            <div class="fixed modal-row">
+                <label for="new-store-city">City:</label>
+                <input asp-for="NewStoreCity" id="new-store-zipcode" class="form-control manage-store-modal-textbox" maxlength="255" placeholder="Enter city" />
+            </div>
+            <div class="fixed modal-row">
+                <label for="new-store-state" class="form-label">State:</label>
+                <select asp-for="NewStoreStateId" asp-items="Model.States" id="new-store-state" class="form-control">
+                    <option value="0">-- Select state --</option>
+                </select>
+            </div>
+            <div class="fixed modal-row">
+                <label for="new-store-zipcode">Zip Code:</label>
+                <input asp-for="NewStoreZipCode" id="new-store-zipcode" class="form-control manage-store-modal-textbox" maxlength="100" placeholder="Enter zip code" />
+            </div>
+
+        </div>
+        <div class="modal-buttons">
+            <button type="submit" class="action-btn create-btn">Create</button>
+            <button id="closeModalBtn" type="button" class="action-btn">Close</button>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script>
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('createModal');
+        const overlay = document.getElementById('modalOverlay');
+
+        // Guard against missing elements so script doesn't throw when openModalBtn isn't rendered
+        if (openModalBtn && closeModalBtn && modal && overlay) {
+            openModalBtn.addEventListener('click', function () {
+                modal.classList.add('show');
+                overlay.classList.add('show');
+            });
+        closeModalBtn.addEventListener('click', function () {
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+        overlay.addEventListener('click', function () {
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+         // Optional: close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                modal.classList.remove('show');
+                overlay.classList.remove('show');
+            }
+        });
+        }
+    </script>
+    }
