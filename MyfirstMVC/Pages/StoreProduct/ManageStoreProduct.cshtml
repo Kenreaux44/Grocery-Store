@@ -2,6 +2,9 @@
 @model MyfirstMVC.Pages.StoreProduct.ManageStoreProductModel
 @{
 }
+<link rel="stylesheet" href="~/css/manage-store-product.css">
+<link rel="stylesheet" href="~/css/buttons.css">
+<link rel="stylesheet" href="~/css/overlay.css">
 <link rel="stylesheet" href="~/css/striped-table.css">
 <link rel="stylesheet" href="~/css/action-button.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -11,6 +14,12 @@
 
     @if (Model.StoreProducts != null && Model.StoreProducts.Any())
     {
+        <div class="right-justify">
+            <button id="openModalBtn" class="action-btn create-btn" title="Create Product">
+                <i class="fas fa-plus"></i> Create
+            </button>
+        </div>
+
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -58,3 +67,65 @@
     }
 
 </div>
+
+
+@* create modal *@
+<div id="modalOverlay" class="modal-overlay"></div>
+<div id="createModal" class="modal">
+    <h2>Create Product</h2>
+    <form method="post" asp-page-handler="Create">
+        <div class="modal-body flex-vertical-container">
+            <div class="fixed">
+                <label>Store:</label>
+                <select id="new-store" asp-for="StoreId" asp-items="Model.Stores" class="form-control manage-storeproduct-modal-dropdown">
+                    <option value="0">-- Choose a store --</option>
+                </select>
+            </div>
+            <div class="flex-fill">
+                <label>Product:</label>
+                <select id="new-Product" asp-for="ProductId" asp-items="Model.Products" class="form-control manage-storeproduct-modal-dropdown">
+                    <option value="0">-- Choose a product --</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <button type="submit" class="action-btn create-btn">Create</button>
+            <button id="closeModalBtn" type="button" class="action-btn">Close</button>
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <script>
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('createModal');
+        const overlay = document.getElementById('modalOverlay');
+
+        // Guard against missing elements so script doesn't throw when openModalBtn isn't rendered
+        if (openModalBtn && closeModalBtn && modal && overlay) {
+            openModalBtn.addEventListener('click', function () {
+                modal.classList.add('show');
+                overlay.classList.add('show');
+            });
+        closeModalBtn.addEventListener('click', function () {
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+        overlay.addEventListener('click', function () {
+            modal.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+
+         // Optional: close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                modal.classList.remove('show');
+                overlay.classList.remove('show');
+            }
+        });
+        }
+    </script>
+}

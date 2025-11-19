@@ -84,7 +84,10 @@
                 <textarea asp-for="ProductDescription" id="new-product-description" class="form-control manage-product-modal-description" maxlength="2000" rows="4" placeholder="Enter Product Description"></textarea>
             </div>
             <div class="flex-fill">
-                <label>Unit of Measure:</label>
+                <label for="new-product-uom">Unit of Measure:</label>
+                <select id="new-product-uom" asp-for="UnitOfMeasure" asp-items="Model.UnitsOfMeasure" class="form-control">
+                    <option value="0">-- Choose a member --</option>
+                </select>
             </div>
         </div>
         <div class="modal-buttons">
